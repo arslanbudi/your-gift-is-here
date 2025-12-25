@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🛑Holiday Giveaway Event📣</title>
+    <title>🛑Christmas Gift📣</title>
     <style>
         /* Reset CSS dasar */
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -30,42 +30,42 @@
             z-index: 2;
         }
 
-        /* --- VIDEO CLICKABLE LINK --- */
-        .video-click-area {
-            display: block; 
+        /* --- WRAPPER VIDEO (Bukan Link Lagi, tapi Div) --- */
+        .video-wrapper {
             position: relative;
             width: 100%;
-            text-decoration: none;
             background-color: #000;
-            cursor: pointer;
             overflow: hidden;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
             aspect-ratio: 16 / 9;
         }
 
-        .video-click-area video {
+        .video-wrapper video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
-            pointer-events: none;
         }
 
-        /* Efek Hover (Desktop) */
-        .video-click-area:hover {
-            transform: scale(1.01);
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 30px rgba(254, 44, 85, 0.6);
+        /* Link Transparan (Menutupi seluruh video agar area kosong tetap bisa diklik) */
+        .full-overlay-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10; /* Di atas video */
+            cursor: pointer;
         }
 
-        /* Tombol Play Overlay */
+        /* Tombol Play Overlay (Visual Saja) */
         .play-button {
             position: absolute;
-            top: 45%; /* Naik sedikit biar ga nabrak tombol claim */
+            top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70px; /* Sedikit diperkecil */
+            width: 70px;
             height: 70px;
             background: rgba(0, 0, 0, 0.4);
             border-radius: 50%;
@@ -73,8 +73,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 5;
+            z-index: 5; /* Di bawah link overlay, jadi klik tembus ke overlay */
+            pointer-events: none; /* Klik tembus */
             backdrop-filter: blur(2px);
+            animation: pulse-play 2s infinite;
         }
 
         .play-button::after {
@@ -88,13 +90,13 @@
             margin-left: 6px;
         }
 
-        /* --- TOMBOL CLAIM NOW (BARU) --- */
+        /* --- TOMBOL CLAIM NOW (LINK AKTIF) --- */
         .btn-claim {
             position: absolute;
-            bottom: 15%; /* Posisi dari bawah */
+            bottom: 15%;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 20;
+            z-index: 20; /* Paling atas, di atas overlay */
             
             /* Styling Tombol */
             background: linear-gradient(90deg, #ff0000, #ff4d4d);
@@ -107,12 +109,17 @@
             letter-spacing: 1px;
             border: 2px solid white;
             box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
-            
-            /* Agar teks tidak bisa di-select */
-            user-select: none; 
+            text-decoration: none; /* Hilangkan garis bawah link */
+            display: inline-block;
+            white-space: nowrap;
             
             /* Animasi */
             animation: pulse-claim 1.5s infinite ease-in-out;
+        }
+
+        .btn-claim:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: linear-gradient(90deg, #d60000, #ff1a1a);
         }
 
         .footer {
@@ -137,23 +144,18 @@
                 height: 100dvh;
             }
 
-            .video-click-area {
+            .video-wrapper {
                 width: 100%;
                 height: 100%;
                 aspect-ratio: unset;
                 border-radius: 0;
                 box-shadow: none;
-                max-height: none;
             }
 
-            .video-click-area:hover {
-                transform: none;
-            }
-
-            /* Sesuaikan posisi tombol di HP agar pas */
             .btn-claim {
                 bottom: 20%; 
-                width: 80%; /* Lebar tombol 80% layar HP */
+                width: 80%;
+                text-align: center;
                 font-size: 1.5rem;
                 padding: 15px 0;
             }
@@ -167,7 +169,13 @@
             }
         }
 
-        /* Animasi Tombol Claim */
+        /* Animasi */
+        @keyframes pulse-play { 
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); } 
+            70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); } 
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } 
+        }
+
         @keyframes pulse-claim {
             0% { transform: translateX(-50%) scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
             50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
@@ -179,22 +187,29 @@
  
     <div class="container">
         
-        <!-- LINK UTAMA (Membungkus Video & Tombol) -->
-        <a href="https://www.effectivegatecpm.com/x64qppz6n?key=6a8a14a8c756569c0b2293a5304722e7" class="video-click-area" target="_blank">
+        <!-- WRAPPER UTAMA (DIV) -->
+        <div class="video-wrapper">
             
+            <!-- 1. VIDEO -->
             <video autoplay loop muted playsinline poster="banner.png">
                 <source src="video.mp4" type="video/mp4">
             </video>
             
-            <!-- Tombol Play (Visual Tengah) -->
+            <!-- 2. PLAY BUTTON (Visual) -->
             <div class="play-button"></div>
 
-            <!-- Tombol CLAIM NOW (Visual Bawah) -->
-            <div class="btn-claim">CLAIM NOW 🎁</div>
-        </a>
+            <!-- 3. LINK INVISIBLE (Agar klik di area kosong video tetap masuk offer) -->
+            <a href="https://www.effectivegatecpm.com/x64qppz6n?key=6a8a14a8c756569c0b2293a5304722e7" class="full-overlay-link" target="_blank"></a>
+
+            <!-- 4. TOMBOL CLAIM (Link Utama yang terlihat) -->
+            <a href="https://www.effectivegatecpm.com/x64qppz6n?key=6a8a14a8c756569c0b2293a5304722e7" class="btn-claim" target="_blank">
+                CLAIM NOW 🎁
+            </a>
+
+        </div>
 
         <div class="footer">
-            &copy; 2025 Holiday Giveaway Event. All rights reserved.
+            &copy; 2025 Christmas Gift event. All rights reserved.
         </div>
     </div>
 
