@@ -1,88 +1,155 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecting...</title>
+    <title>Spirithallowen</title>
     <style>
-        /* Mengatur tampilan dasar halaman */
         body {
-            background-color: #121212; /* Warna background gelap */
-            color: #ffffff; /* Warna teks putih */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #222;
             margin: 0;
             padding: 0;
-            height: 100vh; /* Tinggi layar penuh */
-            display: flex; /* Menggunakan Flexbox untuk ke tengah */
+            display: flex;
             flex-direction: column;
-            justify-content: center; /* Tengah secara vertikal */
-            align-items: center; /* Tengah secara horizontal */
+            align-items: center;
             text-align: center;
         }
 
-        /* Tampilan angka timer */
-        #countdown {
-            font-size: 6rem; /* Ukuran font besar */
+        .container {
+            max-width: 700px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Header Image / Banner */
+        .banner {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        /* Site Title */
+        .site-title {
+            font-size: 1.2em;
+            margin: 10px 0;
             font-weight: bold;
-            margin: 20px 0;
-            color: #ffffff;
+            text-align: left;
+            width: 100%;
+            padding-left: 10px;
         }
 
-        /* Teks pendukung */
+        /* Standard Images */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 1.5em;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
         p {
-            font-size: 1.2rem;
-            color: #cccccc; /* Warna abu muda agar tidak terlalu kontras */
+            font-size: 1em;
+            margin: 10px 0;
+            line-height: 1.4;
         }
 
-        /* Responsif untuk layar kecil (HP) */
-        @media (max-width: 600px) {
-            #countdown {
-                font-size: 4rem;
-            }
-            p {
-                font-size: 1rem;
-                padding: 0 20px;
-            }
+        .handle {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        /* Button/Link Area */
+        .action-link {
+            display: inline-block;
+            transition: opacity 0.3s;
+        }
+        .action-link:hover {
+            opacity: 0.8;
+        }
+
+        /* Text Blocks */
+        .note-text {
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .steps-list {
+            text-align: left;
+            display: inline-block;
+            margin: 10px auto;
+        }
+        
+        .steps-list p {
+            margin: 5px 0;
+        }
+
+        .footer-caps {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
 
+    <!-- Site Header/Banner Section -->
     <div class="container">
-        <!-- <p>Anda akan dialihkan dalam waktu</p> -->
-        <!-- Angka Timer -->
-        <div id="countdown">5</div>
-        <p>second...</p>
+        <!-- Banner Image -->
+        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdN-oVfXdA7_QEhhGn1l7Ahxj-KLMOguFRniYGhmNha9eekH1WE3VTSXZ8mftCx9qcLgFjJi8hrCfCFGaZCd0i_UrCrLSnEdJHT2mTk09z7NUnftlTT5diiIcH-3PbWUGLDuMdTmhkceMMEpycvlxlfYsvZ8elY0Ijf0908nFZqYWb1MByukJLw9dM=w16383" alt="Header" class="banner">
+        
+        <div class="site-title">Spirithallowen</div>
+
+        <!-- Profile/Intro Image -->
+        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkfd_oXBgi58OtltuOBFC_IiKyo2OKbziJ1oRpFxGdamGVpyqzR29PUl7WedNMUELLieTgS_Vn-y-VI7ckV8EjPLqhMzUqFiVrcSlV_tW_glbt_ERKCgsas28EwhFZXoxJWtdQklfTcG_TrzIaE5D9lQeGhpe_JOMCcLaq3wC_N2mhPYTN_cWuCIijc=w1280" alt="Spirit Halloween">
+
+        <div class="handle">@spirithalloween</div>
+
+        <h1>🎉CONGRATULATIONS 🎁</h1>
+
+        <p>You are Lucky today,because you arechosen to get gift for me</p>
+        <p>Follow My instructions to get your reward!!!</p>
+        
+        <p>🎖️Just Complete 2 offer!!Instal and register in the sponsor<br>applicatiopn that appears or complete a survey.</p>
+        
+        <p>Thank For Suport Me!!</p>
+
+        <!-- Reward/Gift Image -->
+        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkcqRcTnGwly8wS7w33mZmd7lNd_K06eZ4Ch6aAg4kI6VKt5GB8xVGmso2jiessrQdYtb97G8UDnaCbudHZxOTb-CHhcl0rknum4tOt3bMSPFSaAPwDp13_oO4gJsgQ8X4zfyz5iQ_iSrW0aWTKExKc4lELcVnQg6EDILpKxlyByY3DqqolLO35UwkE=w1280" alt="Rewards">
+
+        <!-- Call to Action (Clickable Image) -->
+        <a href="https://smrturl.co/a/sa894269b47/576?s1=BZONE" class="action-link">
+            <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdbm5tDfROES-EmPICMohfuVY0eH905WLCKF60-fuBBDGOyFMFvwVQ7K3QLpEJZ-VCzIEX1ywcWd91X5Qq_jIEuHEorufVIlkkUT0NwNQAjW5gxE72dqbHTEzvQY7TSLTKKn_q31iPnjB8RjKuV8EchYkQQaZLciQfe_om34JW0U69r0tfYWUlm7BvuWx6sLzIe-Ykb3I5UxZluuxXi96G6GdmMpzKzSLZV=w1280" alt="Claim Reward">
+        </a>
+
+        <!-- Instructions -->
+        <p class="note-text">NOTE : You Only answer questions,or fill in the Personal data</p>
+        <p>Has been Provided to get the prize, there is no charge at all</p>
+        <p>Follow the steps to get the prize!!!!!!</p>
+
+        <div class="steps-list">
+            <p>🥇.Register your E-Mail</p>
+            <p>🥈.Click Continue</p>
+            <p>🥉Cek E-Mail and Enjoy</p>
+        </div>
+
+        <p class="footer-caps">WE DO NOT ASK FOR CREDIT CARD INFORMATIONS !!</p>
+        <p class="footer-caps">YOU ONLY TO COMPLETE OURS SURVEY DATA!!!</p>
+
+        <!-- Footer Image -->
+        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdCtowQBRPDnSQ9Wbja9YEmLSOWG0ESaMWdAzcwa_c5wRMSe-mu_vZQkV9A_VtSmgIpmB4i6S7pYUAcPYxnpqVhXKm6Eh_fr16CEl2oDDNbqfcEFf04s1n416WWAPHJpqi_w4lmsUTblqZE4EbNiiv45h_fn8ku7F_y5OFHHL_r8_WnH-ZbsLrcU9N2kELV60Dkrp2LB-IrGTXk07y-KGX_DRmwfbRjVsSbzek=w1280" alt="Footer">
     </div>
-
-    <script>
-        // --- KONFIGURASI DI SINI ---
-        
-        // Ganti URL di bawah ini dengan link tujuan Anda
-        const targetUrl = "http://laststep-us-now.netlify.app/?s1=bzone"; 
-        
-        // Waktu hitung mundur dalam detik
-        let timeleft = 5;
-
-        // ---------------------------
-
-        const timerElement = document.getElementById('countdown');
-
-        const downloadTimer = setInterval(function(){
-            // Update tampilan angka
-            timerElement.innerHTML = timeleft;
-            
-            // Kurangi waktu
-            timeleft -= 1;
-
-            // Jika waktu habis (kurang dari 0 karena kita mulai hitung mundur dulu)
-            if(timeleft < 0){
-                clearInterval(downloadTimer);
-                // Redirect ke link
-                window.location.href = targetUrl;
-            }
-        }, 1000); // 1000 milidetik = 1 detik
-    </script>
+ 
     <center>
    <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
 <!-- Histats.com  START  (aync)-->
