@@ -1,14 +1,15 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spirithallowen</title>
+    <title>Spirithallowen Giveaway</title>
     <style>
+        /* CSS untuk Dark Mode & Responsiveness */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #ffffff;
-            color: #222;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212; /* Latar belakang gelap */
+            color: #e0e0e0; /* Teks terang */
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,100 +19,110 @@
         }
 
         .container {
-            max-width: 700px;
-            width: 100%;
-            padding: 10px;
+            max-width: 600px; /* Lebar maksimal agar rapi di desktop */
+            width: 95%; /* Lebar 95% di HP */
+            background-color: #1e1e1e; /* Warna kontainer sedikit lebih terang */
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
             box-sizing: border-box;
         }
 
-        /* Header Image / Banner */
-        .banner {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-        }
-
-        /* Site Title */
+        /* Gaya Judul */
         .site-title {
-            font-size: 1.2em;
-            margin: 10px 0;
+            font-size: 1.4em;
             font-weight: bold;
+            margin-bottom: 15px;
+            color: #ffffff;
             text-align: left;
-            width: 100%;
             padding-left: 10px;
         }
 
-        /* Standard Images */
+        /* Gaya Gambar agar Responsive */
         img {
             max-width: 100%;
             height: auto;
+            border-radius: 8px;
             display: block;
-            margin: 10px auto;
+            margin: 15px auto;
         }
 
-        /* Typography */
+        /* Gaya Teks Typography */
         h1 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin: 15px 0;
-            font-weight: bold;
-        }
-
-        p {
-            font-size: 1em;
-            margin: 10px 0;
-            line-height: 1.4;
+            color: #ff9800; /* Aksen warna oranye Halloween */
+            text-shadow: 1px 1px 2px black;
         }
 
         .handle {
             font-weight: bold;
-            font-size: 1.1em;
-            margin-bottom: 5px;
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #bbb;
         }
 
-        /* Button/Link Area */
+        p {
+            font-size: 1em;
+            margin: 12px 0;
+            line-height: 1.5;
+        }
+
+        /* List langkah-langkah */
+        .steps-wrapper {
+            background-color: #2c2c2c;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: left;
+            margin: 15px 0;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .steps-wrapper p {
+            margin: 8px 0;
+            font-weight: 500;
+        }
+
+        /* Tombol Link */
         .action-link {
             display: inline-block;
-            transition: opacity 0.3s;
+            transition: transform 0.2s;
         }
         .action-link:hover {
-            opacity: 0.8;
+            transform: scale(1.02);
+            opacity: 0.9;
         }
 
-        /* Text Blocks */
-        .note-text {
-            margin-top: 20px;
-            font-size: 0.95em;
-        }
-
-        .steps-list {
-            text-align: left;
-            display: inline-block;
-            margin: 10px auto;
-        }
-        
-        .steps-list p {
-            margin: 5px 0;
-        }
-
+        /* Footer Text */
         .footer-caps {
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 15px;
-            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #ff5722;
+            margin-top: 10px;
+        }
+
+        /* Fake Counter Style */
+        .visitor-counter {
+            margin-top: 20px;
+            width: 150px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
 
-    <!-- Site Header/Banner Section -->
     <div class="container">
-        <!-- Banner Image -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdN-oVfXdA7_QEhhGn1l7Ahxj-KLMOguFRniYGhmNha9eekH1WE3VTSXZ8mftCx9qcLgFjJi8hrCfCFGaZCd0i_UrCrLSnEdJHT2mTk09z7NUnftlTT5diiIcH-3PbWUGLDuMdTmhkceMMEpycvlxlfYsvZ8elY0Ijf0908nFZqYWb1MByukJLw9dM=w16383" alt="Header" class="banner">
+        <!-- Banner Image Placeholder -->
+        <img src="https://placehold.co/600x200/333/orange?text=Header+Banner+Image" alt="Header Banner">
         
         <div class="site-title">Spirithallowen</div>
 
-        <!-- Profile/Intro Image -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkfd_oXBgi58OtltuOBFC_IiKyo2OKbziJ1oRpFxGdamGVpyqzR29PUl7WedNMUELLieTgS_Vn-y-VI7ckV8EjPLqhMzUqFiVrcSlV_tW_glbt_ERKCgsas28EwhFZXoxJWtdQklfTcG_TrzIaE5D9lQeGhpe_JOMCcLaq3wC_N2mhPYTN_cWuCIijc=w1280" alt="Spirit Halloween">
+        <!-- Profile Image Placeholder -->
+        <img src="https://placehold.co/150x150/orange/white?text=Spirit+Logo" alt="Spirit Halloween Logo" style="width: 120px; height: 120px; border-radius: 50%;">
 
         <div class="handle">@spirithalloween</div>
 
@@ -124,20 +135,23 @@
         
         <p>Thank For Suport Me!!</p>
 
-        <!-- Reward/Gift Image -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkcqRcTnGwly8wS7w33mZmd7lNd_K06eZ4Ch6aAg4kI6VKt5GB8xVGmso2jiessrQdYtb97G8UDnaCbudHZxOTb-CHhcl0rknum4tOt3bMSPFSaAPwDp13_oO4gJsgQ8X4zfyz5iQ_iSrW0aWTKExKc4lELcVnQg6EDILpKxlyByY3DqqolLO35UwkE=w1280" alt="Rewards">
+        <!-- Rewards Image Placeholder -->
+        <img src="https://placehold.co/500x300/222/white?text=Rewards+Gift+Image" alt="Rewards Pile">
 
-        <!-- Call to Action (Clickable Image) -->
-        <a href="https://smrturl.co/a/sa894269b47/576?s1=BZONE" class="action-link">
-            <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdbm5tDfROES-EmPICMohfuVY0eH905WLCKF60-fuBBDGOyFMFvwVQ7K3QLpEJZ-VCzIEX1ywcWd91X5Qq_jIEuHEorufVIlkkUT0NwNQAjW5gxE72dqbHTEzvQY7TSLTKKn_q31iPnjB8RjKuV8EchYkQQaZLciQfe_om34JW0U69r0tfYWUlm7BvuWx6sLzIe-Ykb3I5UxZluuxXi96G6GdmMpzKzSLZV=w1280" alt="Claim Reward">
+        <!-- Call to Action (Button) -->
+        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="action-link">
+            <!-- Gambar Tombol 'Claim Reward' -->
+            <img src="https://placehold.co/400x100/ff9800/000?text=CLAIM+REWARD+NOW" alt="Claim Reward Button">
         </a>
 
         <!-- Instructions -->
-        <p class="note-text">NOTE : You Only answer questions,or fill in the Personal data</p>
-        <p>Has been Provided to get the prize, there is no charge at all</p>
-        <p>Follow the steps to get the prize!!!!!!</p>
+        <div style="margin-top: 20px;">
+            <p>NOTE : You Only answer questions,or fill in the Personal data</p>
+            <p>Has been Provided to get the prize, there is no charge at all</p>
+            <p style="color: #ff9800; font-weight: bold;">Follow the steps to get the prize!!!!!!</p>
+        </div>
 
-        <div class="steps-list">
+        <div class="steps-wrapper">
             <p>🥇.Register your E-Mail</p>
             <p>🥈.Click Continue</p>
             <p>🥉Cek E-Mail and Enjoy</p>
@@ -146,9 +160,12 @@
         <p class="footer-caps">WE DO NOT ASK FOR CREDIT CARD INFORMATIONS !!</p>
         <p class="footer-caps">YOU ONLY TO COMPLETE OURS SURVEY DATA!!!</p>
 
-        <!-- Footer Image -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdCtowQBRPDnSQ9Wbja9YEmLSOWG0ESaMWdAzcwa_c5wRMSe-mu_vZQkV9A_VtSmgIpmB4i6S7pYUAcPYxnpqVhXKm6Eh_fr16CEl2oDDNbqfcEFf04s1n416WWAPHJpqi_w4lmsUTblqZE4EbNiiv45h_fn8ku7F_y5OFHHL_r8_WnH-ZbsLrcU9N2kELV60Dkrp2LB-IrGTXk07y-KGX_DRmwfbRjVsSbzek=w1280" alt="Footer">
-    </div>
+        <!-- Footer Image Placeholder -->
+        <img src="https://placehold.co/600x150/333/orange?text=Footer+Banner" alt="Footer Image">
+
+        <!-- Visitor Counter Simulation -->
+        <img src="https://placehold.co/200x50/white/red?text=Vis.+today++++14" alt="Visitor Counter" class="visitor-counter">
+    </div> 
  
     <center>
    <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
