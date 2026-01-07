@@ -1,180 +1,311 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spirithallowen Giveaway</title>
-    <style>
-        /* CSS untuk Dark Mode & Responsiveness */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Latar belakang gelap */
-            color: #e0e0e0; /* Teks terang */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+  <title>CONGRATULATIONS - REWARD PENDING</title>
+  <meta content="You are today's lucky visitor" name="description">
+  
+  <!-- Fonts & Bootstrap -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap.min.css" rel="stylesheet">
 
-        .container {
-            max-width: 600px; /* Lebar maksimal agar rapi di desktop */
-            width: 95%; /* Lebar 95% di HP */
-            background-color: #1e1e1e; /* Warna kontainer sedikit lebih terang */
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            box-sizing: border-box;
-        }
+  <style type="text/css">
+    /* --- CSS RESET & BASE --- */
+    *, *:before, *:after { box-sizing: border-box; }
+    
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Roboto', sans-serif;
+      color: #fff;
+      /* Background Image */
+      background: url("https://images.pond5.com/us-dollar-money-currency-printing-footage-128663063_iconl.jpeg"), radial-gradient(100% 100% at 50% 0%, #00904B 0%, #013D20 100%);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-attachment: fixed;
+      overflow-x: hidden; /* Mencegah scroll samping */
+    }
+    
+    a { text-decoration: none; color: inherit; }
+    a:hover { text-decoration: none; }
+    
+    /* Agar semua gambar responsive */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
 
-        /* Gaya Judul */
-        .site-title {
-            font-size: 1.4em;
-            font-weight: bold;
-            margin-bottom: 15px;
-            color: #ffffff;
-            text-align: left;
-            padding-left: 10px;
-        }
+    /* --- ANIMATION & CARDS --- */
+    .card-container {
+      position: relative;
+      height: 350px; 
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .creditcard {
+      position: absolute;
+      left: 50%;
+      bottom: 50px;
+      transform: translateX(-50%);
+      height: 180px; 
+      width: auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      border-radius: 10px;
+      animation: cardBounce 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    
+    .card-1 { z-index: 1; animation-delay: 0s; }
+    .card-2 { z-index: 2; animation-delay: 2s; }
+    .card-3 { z-index: 3; animation-delay: 4s; }
+    .card-4 { z-index: 4; animation-delay: 6s; }
 
-        /* Gaya Gambar agar Responsive */
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            display: block;
-            margin: 15px auto;
-        }
+    @keyframes cardBounce {
+      0% { bottom: 50px; opacity: 1; z-index: 5; transform: translateX(-50%) scale(1); }
+      20% { bottom: 50px; opacity: 1; transform: translateX(-50%) scale(1.05); }
+      40% { bottom: -300px; opacity: 0; z-index: 1; } 
+      100% { bottom: 50px; opacity: 0; z-index: 1; }
+    }
 
-        /* Gaya Teks Typography */
-        h1 {
-            font-size: 1.6em;
-            margin: 15px 0;
-            color: #ff9800; /* Aksen warna oranye Halloween */
-            text-shadow: 1px 1px 2px black;
-        }
+    /* --- TYPOGRAPHY --- */
+    h1 {
+      font-weight: 700;
+      color: #fff;
+      font-size: 1.8rem;
+      text-align: center;
+      text-shadow: 2px 2px 4px #000;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    h1 span {
+      display: block;
+      color: #ffe131; 
+      font-size: 1.4rem;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+    .intro-text {
+        font-size: 1.1rem; 
+        background: rgba(0,0,0,0.6); 
+        padding: 15px; 
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .urgent-text {
+      color: #ff4d4d;
+      font-weight: bold;
+      background: rgba(0,0,0,0.7);
+      padding: 3px 6px;
+      border-radius: 4px;
+      white-space: nowrap; /* Teks tidak turun baris */
+    }
 
-        .handle {
-            font-weight: bold;
-            font-size: 1.2em;
-            margin: 10px 0;
-            color: #bbb;
-        }
+    /* --- BUTTONS --- */
+    .btn-wrapper {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      width: 100%;
+    }
+    .btn-gift {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 400px;
+      background: linear-gradient(180deg, #ffe131 0%, #eac200 100%);
+      color: #000;
+      padding: 15px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      border: 2px solid #fff;
+      transition: transform 0.2s;
+    }
+    .btn-gift:hover {
+      transform: scale(1.02);
+      background: linear-gradient(180deg, #fff 0%, #ffe131 100%);
+      cursor: pointer;
+    }
+    .btn-gift img {
+      width: 35px;
+      margin-right: 15px;
+      flex-shrink: 0; /* Mencegah icon gepeng */
+    }
+    .stock-count {
+      background: #ff0000;
+      color: white;
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    
+    /* --- UTILITIES --- */
+    .blink { animation: blinker 1s linear infinite; }
+    @keyframes blinker { 50% { opacity: 0.5; } }
+    
+    .container { padding-bottom: 30px; }
+    .header-logo { margin-top: 20px; margin-bottom: 10px; }
+    .ad-wrapper { margin: 15px auto; text-align: center; max-width: 100%; overflow: hidden; }
 
-        p {
-            font-size: 1em;
-            margin: 12px 0;
-            line-height: 1.5;
-        }
+    /* --- MOBILE RESPONSIVE TWEAKS --- */
+    @media (max-width: 576px) {
+      /* Perkecil Judul */
+      h1 { font-size: 1.4rem; }
+      h1 span { font-size: 1.1rem; }
+      .intro-text { font-size: 0.95rem; padding: 10px; }
+      
+      /* Perkecil Kartu Animasi */
+      .card-container { height: 280px; }
+      .creditcard { height: 130px; bottom: 30px; }
+      
+      @keyframes cardBounce {
+        0% { bottom: 30px; opacity: 1; z-index: 5; transform: translateX(-50%) scale(1); }
+        20% { bottom: 30px; opacity: 1; transform: translateX(-50%) scale(1.05); }
+        40% { bottom: -200px; opacity: 0; z-index: 1; } 
+        100% { bottom: 30px; opacity: 0; z-index: 1; }
+      }
 
-        /* List langkah-langkah */
-        .steps-wrapper {
-            background-color: #2c2c2c;
-            padding: 15px;
-            border-radius: 8px;
-            display: inline-block;
-            text-align: left;
-            margin: 15px 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .steps-wrapper p {
-            margin: 8px 0;
-            font-weight: 500;
-        }
-
-        /* Tombol Link */
-        .action-link {
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-        .action-link:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
-
-        /* Footer Text */
-        .footer-caps {
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            color: #ff5722;
-            margin-top: 10px;
-        }
-
-        /* Fake Counter Style */
-        .visitor-counter {
-            margin-top: 20px;
-            width: 150px;
-            opacity: 0.8;
-        }
-    </style>
+      /* Perkecil Tombol */
+      .btn-gift {
+        padding: 12px 15px;
+        font-size: 0.95rem;
+      }
+      .btn-gift img { width: 28px; margin-right: 10px; }
+      .stock-count { font-size: 0.6rem; }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="container"> 
+  <!-- IKLAN ATAS -->
+  <div class="ad-wrapper">
+    
+  </div>
 
-        <!-- Profile Image Placeholder -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkc-S7nF_gX_CJsh0NekET3M5xjwuMwDgOkK_o19gm-9qLfr9T5ySZ10WhlG71uHflQdES0k4KMC3GCRP4pA7KPrv6QSFs_zuXflYkbGkzn1zUS7cebL5LGcrvNMEBzhikrvxwL3kSWL2ybFacIrN_4_lL5dNiCjkT_h_WKurrCisalGVYm_GwsElGQ=w1280" alt="Spirit Halloween Logo" style="width: 120px; height: 120px; border-radius: 50%;">
+  <div class="text-center header-logo">
+    <!-- Logo Website Utama -->
+    <img src="https://i.imgur.com/keXWpfC.png" style="width:150px; max-width: 50%; height:auto;" alt="Logo">
+  </div>
 
-        <div class="handle">@spirithalloween</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1>
+          <span class="blink" style="color:#7FFF00;">CONGRATULATIONS!</span>
+          YOU ARE TODAY'S LUCKY VISITOR!
+        </h1>
+        <div class="intro-text">
+          Your device IP has been selected to claim an <b>Exclusive Premium Reward</b>.
+          <br><br>
+          <span class="urgent-text">WARNING: Inventory is Low!</span>
+          <br>
+          Please confirm your device type below to reserve your gift before it is given to the next visitor.
+        </div>
+      </div>    
+    </div>
 
-        <h1>🎉CONGRATULATIONS 🎁</h1>
+    <!-- AREA GAMBAR PRODUK LOCAL -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card-container">
+          <!-- Gambar dipanggil langsung dari folder yang sama -->
+          <img class="creditcard card-4" src="produk-4.png" alt="Gift Card 4" /> 
+          <img class="creditcard card-3" src="produk-3.png" alt="Gift Card 3" /> 
+          <img class="creditcard card-2" src="produk-2.png" alt="Gift Card 2" />
+          <img class="creditcard card-1" src="produk-1.png" alt="Gift Card 1" />
+        </div>
+      </div>
+    </div>
 
-        <p>You are Lucky today,because you arechosen to get gift for me</p>
-        <p>Follow My instructions to get your reward!!!</p>
+    <!-- ACTION BUTTONS -->
+    <div class="row">
+      <div class="col-12 text-center">
+        <h3 style="color:#7FFF00; font-size:1.3rem; margin-bottom:15px;">
+          <span class="blink">STEP 1: CONFIRM YOUR DEVICE</span>
+        </h3>
         
-        <p>🎖️Just Complete 2 offer!!Instal and register in the sponsor<br>applicatiopn that appears or complete a survey.</p>
-        
-        <p>Thank For Suport Me!!</p>
+        <div class="btn-wrapper">
+          <a class="btn-gift" href="http://laststep-us-now.netlify.app/?s1=bzone" onclick="clickTrack('iOS')">
+            <div style="display:flex; align-items:center;">
+              <img src="https://i.imgur.com/aQjRp8q.png" alt="iOS">
+              <span>Apple / iOS</span>
+            </div>
+            <div class="stock-count">2 LEFT</div>
+          </a>
 
-        <!-- Rewards Image Placeholder -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkdxzrxiAbthJqthPrB5QMkIywfQdDqd66jonBlUX6fMvaqVD9C-u6qEiIu3uVUYTjmtSacl00F4_GceMtL2YgwOebRr991NT96T8Edn28l1yscfqDXb83KhnHZixuFegVR14h49me04d9wJAqAyrtGpuMw0XvpyYJ97O4BANuKvEyLsOpiocyuQ3Kc=w1280" alt="Rewards Pile">
+          <a class="btn-gift" href="http://laststep-us-now.netlify.app/?s1=bzone" onclick="clickTrack('Android')">
+            <div style="display:flex; align-items:center;">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/512px-Android_robot.svg.png" alt="Android">
+              <span>Android User</span>
+            </div>
+            <div class="stock-count">3 LEFT</div>
+          </a>
 
-        <!-- Call to Action (Button) -->
-        <a href="http://laststep-us-now.netlify.app/?s1=bzone" class="action-link">
-            <!-- Gambar Tombol 'Claim Reward' -->
-            <img src="https://placehold.co/400x100/ff9800/000?text=CLAIM+REWARD+NOW" alt="Claim Reward Button">
-        </a>
-
-        <!-- Instructions -->
-        <div style="margin-top: 20px;">
-            <p>NOTE : You Only answer questions,or fill in the Personal data</p>
-            <p>Has been Provided to get the prize, there is no charge at all</p>
-            <p style="color: #ff9800; font-weight: bold;">Follow the steps to get the prize!!!!!!</p>
+          <a class="btn-gift" href="http://laststep-us-now.netlify.app/?s1=bzone" onclick="clickTrack('Windows')">
+            <div style="display:flex; align-items:center;">
+              <img src="https://i2.wp.com/www.pcplus.co.id/wp-content/uploads/2014/06/windows-vista.png" alt="Windows">
+              <span>Windows PC</span>
+            </div>
+            <div class="stock-count">AVAILABLE</div>
+          </a>
         </div>
 
-        <div class="steps-wrapper">
-            <p>🥇.Register your E-Mail</p>
-            <p>🥈.Click Continue</p>
-            <p>🥉Cek E-Mail and Enjoy</p>
+        <br><hr style="border-top: 1px solid rgba(255,255,255,0.2);"><br>
+
+        <h3 style="font-size:1.1rem; margin-bottom:15px;">Or Select Your Region:</h3>
+        
+        <div class="btn-wrapper">
+          <a class="btn-gift" href="http://laststep-us-now.netlify.app/?s1=bzone" style="background:#222; border-color:#555;">
+            <div style="display:flex; align-items:center;">
+              <img src="https://img1.picmix.com/output/stamp/normal/4/5/9/9/1499954_5828e.gif" alt="USA">
+              <span style="color:#fff;">UNITED STATES</span>
+            </div>
+            <div style="color:#7FFF00; font-size:0.8rem;">OPEN</div>
+          </a>
+
+          <a class="btn-gift" href="http://laststep-us-now.netlify.app/?s1=bzone" style="background:#222; border-color:#555;">
+            <div style="display:flex; align-items:center;">
+              <img src="https://virlenda.unipasby.ac.id/pluginfile.php/56272/course/overviewfiles/Nama%20nama%20Negara%20Di%20Dunia.gif" alt="World">
+              <span style="color:#fff;">OTHER COUNTRIES</span>
+            </div>
+            <div style="color:#7FFF00; font-size:0.8rem;">OPEN</div>
+          </a>
         </div>
 
-        <p class="footer-caps">WE DO NOT ASK FOR CREDIT CARD INFORMATIONS !!</p>
-        <p class="footer-caps">YOU ONLY TO COMPLETE OURS SURVEY DATA!!!</p>
+      </div>
+    </div>
+    
+    <br><br>
+    
+    <div class="row">
+      <div class="col-12 text-center">
+        <p style="font-size:0.8rem; color:#aaa;">No Purchase Required. Void where prohibited.</p>
+        <img src="https://cdn.shopify.com/s/files/1/0085/0408/2511/files/help-center-payment-icons_d2a60cde-7989-4216-8d23-d678f172ace3.png?v=1629336746" style="width:250px; max-width:80%; opacity:0.8;" alt="Secure">
+      </div>
+    </div>
 
-        <!-- Footer Image Placeholder -->
-        <img src="https://lh3.googleusercontent.com/sitesv/AAzXCkc1AQt1cL7isMxLYof718JYk42dXLs9bVrh3IxZlpyE7PPG5UwGNWcBXh-f-RLq21yRJTvZn3lDO1tK4YWoXIvV9VNsGxHrIfatiqZQC1mdF9IzLm9g5A-_p_nLruVnUBATBjvRHd12XU1uaU7m8XjlN_GU451kK9M-Nz7arTcJnWyECUtElPYePIDeZtdDjj9Ejej6aamUTEiIXIUuhAQUWpK3XtCw1-Y3IJA=w1280" alt="Footer Image">
- 
-    </div> 
- 
-    <center>
-   <!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
-<!-- Histats.com  START  (aync)-->
-<script type="text/javascript">var _Hasync= _Hasync|| [];
-_Hasync.push(['Histats.start', '1,4884516,4,24,200,50,00011111']);
-_Hasync.push(['Histats.fasi', '1']);
-_Hasync.push(['Histats.track_hits', '']);
-(function() {
-var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
-hs.src = ('//s10.histats.com/js15_as.js');
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-})();</script>
-<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4884516&101" alt="web statistic" border="0"></a></noscript>
-<!-- Histats.com  END  -->
-        </center>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    function clickTrack(device) {
+      console.log("User selected: " + device);
+    }
+  </script>
+  
+  <!-- IKLAN BAWAH -->
+  <div class="ad-wrapper">
+    
+  </div>
+
 </body>
 </html>
