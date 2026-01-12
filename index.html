@@ -155,7 +155,6 @@
             <div class="card">
                 <span class="success-icon">🎉</span>
                 
-                <!-- Saya beri ID pada setiap teks agar bisa diubah JS -->
                 <div class="title" id="txt-title">You are Eligible!</div>
                 
                 <div class="subtitle" id="txt-subtitle">
@@ -178,6 +177,8 @@
                 </a>
             </div>
             <p style="margin-top:15px; color:#555; font-size:0.8rem;" id="txt-footer">Safe & Secure Redirect</p>
+            <!-- Debugging Info (Hidden in normal view, viewable in source/console) -->
+            <div id="debug-info" style="display:none; color:red;"></div>
         </div>
 
     </div>
@@ -200,8 +201,7 @@
             "ID": "https://profita.g2afse.com/sl?id=677e6866fa106c73876df3d8&pid=2346&sub1=BZONE"
         };
 
-        // --- 2. KAMUS BAHASA (TRANSLATION DICTIONARY) ---
-        // Format: "KODE_NEGARA": { id_element: "Teks Terjemahan" }
+        // --- 2. KAMUS BAHASA ---
         const translations = {
             "ID": { // Indonesia
                 "txt-title": "Selamat! Anda Terpilih!",
@@ -258,7 +258,7 @@
                 "txt-btn": "ODBIERZ TERAZ ➤",
                 "txt-footer": "Bezpieczne przekierowanie"
             },
-            "PH": { // Filipina (Tagalog/English mix)
+            "PH": { // Filipina
                 "txt-title": "Kwalipikado Ka!",
                 "txt-subtitle": "Upang makuha ang iyong giveaway, tapusin ang huling hakbang sa susunod na pahina. Ito ay <strong>100% LIBRE</strong>.",
                 "txt-step1": "🥇 I-register ang iyong Email",
@@ -280,18 +280,14 @@
                 "txt-btn": "今すぐ受け取る ➤",
                 "txt-footer": "安全なリダイレクト"
             }
-            // SA (Arab) dan GB/US akan menggunakan default bahasa Inggris
         };
 
         let finalRedirectUrl = desktopLink; 
 
-        // --- 3. FUNGSI GANTI BAHASA ---
+        // Fungsi Helper untuk Update Teks
         function updateTextLanguage(countryCode) {
-            // Cek apakah ada terjemahan untuk kode negara ini
             if (translations[countryCode]) {
                 const langData = translations[countryCode];
-                
-                // Update teks berdasarkan ID elemen
                 if(langData["txt-title"]) document.getElementById("txt-title").innerHTML = langData["txt-title"];
                 if(langData["txt-subtitle"]) document.getElementById("txt-subtitle").innerHTML = langData["txt-subtitle"];
                 if(langData["txt-step1"]) document.getElementById("txt-step1").innerHTML = langData["txt-step1"];
@@ -301,47 +297,72 @@
                 if(langData["txt-warn-sub"]) document.getElementById("txt-warn-sub").innerHTML = langData["txt-warn-sub"];
                 if(langData["txt-btn"]) document.getElementById("txt-btn").innerHTML = langData["txt-btn"];
                 if(langData["txt-footer"]) document.getElementById("txt-footer").innerHTML = langData["txt-footer"];
-                
-                console.log("Language updated to: " + countryCode);
-            } else {
-                console.log("No translation found for " + countryCode + ". Using Default English.");
+                console.log("Success: Language changed to " + countryCode);
             }
         }
 
-        // --- 4. DETEKSI & LOGIKA UTAMA ---
+        // --- LOGIKA UTAMA ---
         async function determineTargetUrl() {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+            // 1. Cek jika Desktop
             if (!isMobile) {
+                console.log("Device: Desktop");
                 finalRedirectUrl = desktopLink;
-                // Desktop tetap bahasa Inggris (Default)
                 return;
             }
 
-            // Jika Mobile, Default ke US dulu
+            // 2. Jika Mobile, Default ke US dulu
+            console.log("Device: Mobile");
             finalRedirectUrl = defaultMobileLink; 
             
-            try {
-                const response = await fetch('https://ipapi.co/json/');
-                const data = await response.json();
-                const countryCode = data.country_code; 
+            // Variabel untuk menyimpan kode negara yang ditemukan
+            let detectedCountry = null;
 
-                // 1. Set Link Tujuan
-                if (specificMobileLinks[countryCode]) {
-                    finalRedirectUrl = specificMobileLinks[countryCode];
+            try {
+                // Gunakan API ipwho.is (Lebih stabil & gratis tanpa key)
+                // Jika ipapi.co sering gagal, ini alternatif terbaik
+                const response = await fetch('https://ipwho.is/');
+                const data = await response.json();
+                
+                if(data.success) {
+                   detectedCountry = data.country_code; 
+                   console.log("API Success. Country: " + detectedCountry);
+                } else {
+                   throw new Error("API Limit/Error");
                 }
 
-                // 2. Ubah Bahasa Tampilan (Fitur Baru)
-                updateTextLanguage(countryCode);
-
             } catch (error) {
-                console.error("Gagal detect lokasi. Gunakan default.", error);
+                console.warn("API Failed, trying browser settings...", error);
+                
+                // BACKUP: Cek Bahasa Browser/HP pengguna
+                // Jika API gagal (kena adblock), kita cek settingan bahasa HP nya
+                const browserLang = navigator.language || navigator.userLanguage; 
+                console.log("Browser Language: " + browserLang);
+
+                if (browserLang.toLowerCase().includes('id')) detectedCountry = "ID";
+                else if (browserLang.toLowerCase().includes('de')) detectedCountry = "DE";
+                else if (browserLang.toLowerCase().includes('fr')) detectedCountry = "FR";
+                else if (browserLang.toLowerCase().includes('es')) detectedCountry = "ES";
+                else if (browserLang.toLowerCase().includes('pl')) detectedCountry = "PL";
+                else if (browserLang.toLowerCase().includes('jp') || browserLang.toLowerCase().includes('ja')) detectedCountry = "JP";
+            }
+
+            // 3. Terapkan Perubahan (Jika negara ditemukan)
+            if (detectedCountry) {
+                // Set Link
+                if (specificMobileLinks[detectedCountry]) {
+                    finalRedirectUrl = specificMobileLinks[detectedCountry];
+                }
+                // Set Bahasa
+                updateTextLanguage(detectedCountry);
             }
         }
 
+        // Jalankan fungsi
         determineTargetUrl();
 
-        // --- 5. ANIMASI ---
+        // --- ANIMASI ---
         const loadingScreen = document.getElementById('loading-screen');
         const contentScreen = document.getElementById('content-screen');
         const loadingText = document.getElementById('loading-text');
