@@ -67,10 +67,13 @@
             border: 1px solid #333;
         }
 
+        /* --- PERUBAHAN CSS UNTUK GAMBAR --- */
         .success-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            display: block;
+            width: 120px; /* Atur ukuran gambar di sini */
+            height: auto; /* Agar proporsional */
+            margin-bottom: 20px;
+            display: inline-block;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); /* Efek glow sedikit */
         }
 
         .title {
@@ -153,7 +156,10 @@
         <!-- CONTENT SCREEN -->
         <div id="content-screen">
             <div class="card">
-                <span class="success-icon">🎉</span>
+                
+                <!-- BAGIAN INI SUDAH DIUBAH MENJADI IMAGE -->
+                <!-- Pastikan file 'image.png' ada di folder yang sama -->
+                <img src="image.png" alt="Success Gift" class="success-icon">
                 
                 <div class="title" id="txt-title">You are Eligible!</div>
                 
@@ -177,8 +183,6 @@
                 </a>
             </div>
             <p style="margin-top:15px; color:#555; font-size:0.8rem;" id="txt-footer">Safe & Secure Redirect</p>
-            <!-- Debugging Info (Hidden in normal view, viewable in source/console) -->
-            <div id="debug-info" style="display:none; color:red;"></div>
         </div>
 
     </div>
@@ -203,7 +207,7 @@
 
         // --- 2. KAMUS BAHASA ---
         const translations = {
-            "ID": { // Indonesia
+            "ID": { 
                 "txt-title": "Selamat! Anda Terpilih!",
                 "txt-subtitle": "Untuk klaim hadiah Anda, silakan selesaikan langkah terakhir di halaman berikutnya. Ini <strong>100% GRATIS</strong>.",
                 "txt-step1": "🥇 Daftarkan Email Anda",
@@ -214,7 +218,7 @@
                 "txt-btn": "AMBIL HADIAH ➤",
                 "txt-footer": "Pengalihan Aman & Terjamin"
             },
-            "DE": { // Jerman
+            "DE": {
                 "txt-title": "Sie sind teilnahmeberechtigt!",
                 "txt-subtitle": "Um Ihren Gewinn anzufordern, schließen Sie bitte den letzten Schritt auf der nächsten Seite ab. Es ist <strong>100% KOSTENLOS</strong>.",
                 "txt-step1": "🥇 Registrieren Sie Ihre E-Mail",
@@ -225,7 +229,7 @@
                 "txt-btn": "JETZT BEANSPRUCHEN ➤",
                 "txt-footer": "Sichere Weiterleitung"
             },
-            "FR": { // Prancis
+            "FR": {
                 "txt-title": "Vous êtes éligible !",
                 "txt-subtitle": "Pour réclamer votre cadeau, veuillez terminer la dernière étape sur la page suivante. C'est <strong>100% GRATUIT</strong>.",
                 "txt-step1": "🥇 Enregistrez votre Email",
@@ -236,7 +240,7 @@
                 "txt-btn": "RÉCLAMER MAINTENANT ➤",
                 "txt-footer": "Redirection Sécurisée"
             },
-            "ES": { // Spanyol
+            "ES": {
                 "txt-title": "¡Eres elegible!",
                 "txt-subtitle": "Para reclamar tu premio, completa el paso final en la siguiente página. Es <strong>100% GRATIS</strong>.",
                 "txt-step1": "🥇 Registra tu correo electrónico",
@@ -247,7 +251,7 @@
                 "txt-btn": "RECLAMAR AHORA ➤",
                 "txt-footer": "Redirección Segura"
             },
-            "PL": { // Polandia
+            "PL": {
                 "txt-title": "Jesteś uprawniony!",
                 "txt-subtitle": "Aby odebrać nagrodę, wykonaj ostatni krok na następnej stronie. To w <strong>100% DARMOWE</strong>.",
                 "txt-step1": "🥇 Zarejestruj swój e-mail",
@@ -258,7 +262,7 @@
                 "txt-btn": "ODBIERZ TERAZ ➤",
                 "txt-footer": "Bezpieczne przekierowanie"
             },
-            "PH": { // Filipina
+            "PH": {
                 "txt-title": "Kwalipikado Ka!",
                 "txt-subtitle": "Upang makuha ang iyong giveaway, tapusin ang huling hakbang sa susunod na pahina. Ito ay <strong>100% LIBRE</strong>.",
                 "txt-step1": "🥇 I-register ang iyong Email",
@@ -269,7 +273,7 @@
                 "txt-btn": "KUNIN NGAYON ➤",
                 "txt-footer": "Ligtas na Redirect"
             },
-            "JP": { // Jepang
+            "JP": {
                 "txt-title": "当選資格があります！",
                 "txt-subtitle": "プレゼントを受け取るには、次のページで最後の手順を完了してください。<strong>100%無料</strong>です。",
                 "txt-step1": "🥇 メールアドレスを登録",
@@ -284,7 +288,6 @@
 
         let finalRedirectUrl = desktopLink; 
 
-        // Fungsi Helper untuk Update Teks
         function updateTextLanguage(countryCode) {
             if (translations[countryCode]) {
                 const langData = translations[countryCode];
@@ -297,49 +300,34 @@
                 if(langData["txt-warn-sub"]) document.getElementById("txt-warn-sub").innerHTML = langData["txt-warn-sub"];
                 if(langData["txt-btn"]) document.getElementById("txt-btn").innerHTML = langData["txt-btn"];
                 if(langData["txt-footer"]) document.getElementById("txt-footer").innerHTML = langData["txt-footer"];
-                console.log("Success: Language changed to " + countryCode);
             }
         }
 
-        // --- LOGIKA UTAMA ---
         async function determineTargetUrl() {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-            // 1. Cek jika Desktop
             if (!isMobile) {
-                console.log("Device: Desktop");
                 finalRedirectUrl = desktopLink;
                 return;
             }
 
-            // 2. Jika Mobile, Default ke US dulu
-            console.log("Device: Mobile");
             finalRedirectUrl = defaultMobileLink; 
-            
-            // Variabel untuk menyimpan kode negara yang ditemukan
             let detectedCountry = null;
 
             try {
-                // Gunakan API ipwho.is (Lebih stabil & gratis tanpa key)
-                // Jika ipapi.co sering gagal, ini alternatif terbaik
+                // Menggunakan ipwho.is (API Stabil)
                 const response = await fetch('https://ipwho.is/');
                 const data = await response.json();
                 
                 if(data.success) {
                    detectedCountry = data.country_code; 
-                   console.log("API Success. Country: " + detectedCountry);
                 } else {
                    throw new Error("API Limit/Error");
                 }
 
             } catch (error) {
-                console.warn("API Failed, trying browser settings...", error);
-                
-                // BACKUP: Cek Bahasa Browser/HP pengguna
-                // Jika API gagal (kena adblock), kita cek settingan bahasa HP nya
+                // BACKUP: Deteksi bahasa HP jika API gagal
                 const browserLang = navigator.language || navigator.userLanguage; 
-                console.log("Browser Language: " + browserLang);
-
                 if (browserLang.toLowerCase().includes('id')) detectedCountry = "ID";
                 else if (browserLang.toLowerCase().includes('de')) detectedCountry = "DE";
                 else if (browserLang.toLowerCase().includes('fr')) detectedCountry = "FR";
@@ -348,21 +336,16 @@
                 else if (browserLang.toLowerCase().includes('jp') || browserLang.toLowerCase().includes('ja')) detectedCountry = "JP";
             }
 
-            // 3. Terapkan Perubahan (Jika negara ditemukan)
             if (detectedCountry) {
-                // Set Link
                 if (specificMobileLinks[detectedCountry]) {
                     finalRedirectUrl = specificMobileLinks[detectedCountry];
                 }
-                // Set Bahasa
                 updateTextLanguage(detectedCountry);
             }
         }
 
-        // Jalankan fungsi
         determineTargetUrl();
 
-        // --- ANIMASI ---
         const loadingScreen = document.getElementById('loading-screen');
         const contentScreen = document.getElementById('content-screen');
         const loadingText = document.getElementById('loading-text');
